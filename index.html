@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vitaflex | Cuidamos tu cuerpo y acompañamos tu mente</title>
+  <link rel="icon" type="image/png" href="logo.png">
+  <style>
+    /* Variables de identidad visual */
+    :root {
+      --principal: #FFFFFF;
+      --secundario: #323875;
+      --acento: #CF9EB5;
+      --fondo: #FFFFFF;
+      --texto: #020537;
+      --texto-claro: #FFFFFF;
+      --sombra: 0 8px 24px rgba(2, 5, 55, 0.10);
+      --radio: 18px;
+    }
+
+    /* Estilos generales */
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 85px; }
+    body {
+      margin: 0;
+      background: var(--fondo);
+      color: var(--texto);
+      font-family: Georgia, "Times New Roman", serif;
+      line-height: 1.6;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; }
+    .contenedor { width: min(1120px, 90%); margin: 0 auto; }
+    .titulo-seccion {
+      color: var(--secundario);
+      font-size: clamp(2rem, 4vw, 2.7rem);
+      text-align: center;
+      margin: 0 0 12px;
+    }
+    .subtitulo-seccion {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 38px;
+    }
+    .boton {
+      display: inline-block;
+      border: 2px solid var(--secundario);
+      border-radius: 999px;
+      padding: 12px 24px;
+      background: var(--secundario);
+      color: var(--texto-claro);
+      font: bold 1rem Georgia, "Times New Roman", serif;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform .2s, background .2s;
+    }
+    .boton:hover { background: var(--texto); transform: translateY(-2px); }
+
+    /* Menú fijo de navegación */
+    .barra-navegacion {
+      position: fixed;
+      z-index: 100;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: var(--principal);
+      box-shadow: 0 2px 14px rgba(2, 5, 55, .12);
+    }
+    .nav-interior {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .marca {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--secundario);
+      text-decoration: none;
+      font-size: 1.45rem;
+      font-weight: bold;
+    }
+    .marca img { width: 48px; height: 48px; object-fit: contain; }
+    .enlaces-nav { display: flex; align-items: center; gap: 25px; }
+    .enlaces-nav a {
+      text-decoration: none;
+      color: var(--texto);
+      font-weight: bold;
+    }
+    .enlaces-nav a:hover { color: var(--acento); }
+    .boton-menu {
+      display: none;
+      border: 0;
+      background: var(--secundario);
+      color: white;
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 1.35rem;
+      cursor: pointer;
+    }
+
+    /* Sección de inicio */
+    main { padding-top: 76px; }
+    .inicio {
+      min-height: 610px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 75px 20px;
+      background: linear-gradient(135deg, var(--principal) 55%, #f5eaf0 100%);
+    }
+    .inicio-contenido { max-width: 800px; }
+    .logo-inicio {
+      width: 150px;
+      height: 150px;
+      object-fit: contain;
+      margin: 0 auto 18px;
+    }
+    .inicio h1 {
+      margin: 0;
+      color: var(--secundario);
+      font-size: clamp(3rem, 8vw, 5.2rem);
+      line-height: 1.1;
+    }
+    .eslogan { font-size: clamp(1.15rem, 3vw, 1.55rem); margin: 18px 0 28px; }
+
+    /* Sección sobre la empresa */
+    section { padding: 82px 0; }
+    .sobre { background: #faf8fb; }
+    .datos-empresa {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin-bottom: 38px;
+    }
+    .dato {
+      background: var(--principal);
+      border-left: 5px solid var(--acento);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: var(--sombra);
+    }
+    .dato h3 { color: var(--secundario); margin: 0 0 7px; }
+    .propuesta {
+      background: var(--secundario);
+      color: var(--texto-claro);
+      border-radius: var(--radio);
+      padding: 25px;
+      margin-bottom: 38px;
+    }
+    .propuesta h3 { margin-top: 0; color: white; }
+    .equipo {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .integrante {
+      background: white;
+      text-align: center;
+      padding: 19px 12px;
+      border-radius: 14px;
+      box-shadow: var(--sombra);
+    }
+    .integrante strong { display: block; color: var(--secundario); font-size: 1.08rem; }
+    .integrante span { font-size: .95rem; }
+
+    /* Catálogo de productos */
+    .catalogo { background: var(--principal); }
+    .productos {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 28px;
+    }
+    .producto {
+      overflow: hidden;
+      border-radius: var(--radio);
+      background: white;
+      box-shadow: var(--sombra);
+      border: 1px solid #eeeaf0;
+    }
+    .producto-foto {
+      width: 100%;
+      height: 290px;
+      object-fit: contain;
+      padding: 18px;
+      background: #faf8fb;
+      cursor: zoom-in;
+    }
+    .producto-contenido { padding: 24px; }
+    .producto h3 { color: var(--secundario); font-size: 1.55rem; margin: 0 0 10px; }
+    .precio {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 7px 15px;
+      border-radius: 999px;
+      background: var(--acento);
+      color: var(--texto);
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+
+    /* Sección de contacto */
+    .contacto { background: #faf8fb; }
+    .contacto-grid {
+      display: grid;
+      grid-template-columns: .85fr 1.15fr;
+      gap: 35px;
+      align-items: start;
+    }
+    .datos-contacto, .formulario {
+      background: white;
+      border-radius: var(--radio);
+      padding: 26px;
+      box-shadow: var(--sombra);
+    }
+    .datos-contacto h3, .formulario h3 { color: var(--secundario); margin-top: 0; }
+    .correo { font-weight: bold; overflow-wrap: anywhere; }
+    .campo { margin-bottom: 16px; }
+    label { display: block; margin-bottom: 6px; font-weight: bold; }
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #b9bad0;
+      border-radius: 9px;
+      font: 1rem Georgia, "Times New Roman", serif;
+      color: var(--texto);
+      background: white;
+    }
+    input:focus, textarea:focus { outline: 2px solid var(--acento); border-color: var(--secundario); }
+    textarea { min-height: 130px; resize: vertical; }
+    .nota-formulario { font-size: .9rem; }
+
+    /* Pie de página */
+    footer {
+      padding: 22px;
+      text-align: center;
+      background: var(--secundario);
+      color: white;
+    }
+
+    /* Ventana emergente de las fotografías */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 200;
+      inset: 0;
+      padding: 25px;
+      background: rgba(2, 5, 35, .88);
+      align-items: center;
+      justify-content: center;
+    }
+    .modal.abierto { display: flex; }
+    .modal-contenido {
+      max-width: min(850px, 95vw);
+      max-height: 88vh;
+      position: relative;
+    }
+    .modal img {
+      max-height: 82vh;
+      width: auto;
+      max-width: 100%;
+      margin: auto;
+      object-fit: contain;
+      border-radius: 12px;
+      background: white;
+    }
+    .cerrar-modal {
+      position: absolute;
+      top: -42px;
+      right: 0;
+      border: 0;
+      background: transparent;
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+    }
+
+    /* Ajustes para pantallas pequeñas */
+    @media (max-width: 760px) {
+      .nav-interior { min-height: 68px; }
+      .boton-menu { display: block; }
+      .enlaces-nav {
+        display: none;
+        position: absolute;
+        top: 68px;
+        left: 0;
+        width: 100%;
+        padding: 18px 5%;
+        background: white;
+        box-shadow: 0 8px 12px rgba(2, 5, 55, .10);
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+      }
+      .enlaces-nav.visible { display: flex; }
+      main { padding-top: 68px; }
+      .inicio { min-height: 540px; }
+      .datos-empresa, .productos, .contacto-grid { grid-template-columns: 1fr; }
+      .equipo { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      section { padding: 65px 0; }
+      .producto-foto { height: 250px; }
+    }
+    @media (max-width: 390px) {
+      .marca { font-size: 1.2rem; }
+      .marca img { width: 40px; height: 40px; }
+      .equipo { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Menú fijo de navegación -->
+  <header class="barra-navegacion">
+    <nav class="contenedor nav-interior" aria-label="Navegación principal">
+      <a class="marca" href="#inicio">
+        <img src="logo.png" alt="Logo de Vitaflex">
+        <span>Vitaflex</span>
+      </a>
+      <button class="boton-menu" id="botonMenu" aria-label="Abrir menú" aria-expanded="false">☰</button>
+      <div class="enlaces-nav" id="enlacesNav">
+        <a href="#inicio">Inicio</a>
+        <a href="#sobre">Sobre la empresa</a>
+        <a href="#catalogo">Catálogo</a>
+        <a href="#contacto">Contacto</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Sección 1: Inicio -->
+    <section class="inicio" id="inicio">
+      <div class="inicio-contenido">
+        <img class="logo-inicio" src="logo.png" alt="Logo de Vitaflex">
+        <h1>Vitaflex</h1>
+        <p class="eslogan">Cuidamos tu cuerpo y acompañamos tu mente</p>
+        <a class="boton" href="#catalogo">Conoce nuestro catálogo</a>
+      </div>
+    </section>
+
+    <!-- Sección 2: Sobre la empresa -->
+    <section class="sobre" id="sobre">
+      <div class="contenedor">
+        <h2 class="titulo-seccion">Sobre la empresa</h2>
+        <p class="subtitulo-seccion">Somos una empresa estudiantil que busca promover el bienestar físico y mental mediante productos innovadores fabricados con impresión 3D.</p>
+
+        <div class="datos-empresa">
+          <article class="dato">
+            <h3>Eje temático</h3>
+            <p>Impresión 3D</p>
+          </article>
+          <article class="dato">
+            <h3>Enfoque o nicho</h3>
+            <p>Salud mental y física</p>
+          </article>
+          <article class="dato">
+            <h3>Cliente objetivo</h3>
+            <p>Todas las edades</p>
+          </article>
+          <article class="dato">
+            <h3>Empresa</h3>
+            <p>Vitaflex</p>
+          </article>
+        </div>
+
+        <div class="propuesta">
+          <h3>Nuestra propuesta de valor</h3>
+          <p>Nos enfocamos en promover el bienestar físico y mental mediante productos innovadores fabricados con filamentos 3D, como yesos ergonómicos que brindan mayor comodidad y objetos antiestrés que favorecen la relajación.</p>
+        </div>
+
+        <h3 class="titulo-seccion">Nuestro equipo</h3>
+        <div class="equipo">
+          <div class="integrante"><strong>Keyla</strong><span>Directora de marketing</span></div>
+          <div class="integrante"><strong>Aynara</strong><span>Diseñadora gráfica</span></div>
+          <div class="integrante"><strong>Amalia</strong><span>Gerente general</span></div>
+          <div class="integrante"><strong>Santiago</strong><span>Subgerente</span></div>
+          <div class="integrante"><strong>Victoria</strong><span>Atención al cliente</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección 3: Catálogo -->
+    <section class="catalogo" id="catalogo">
+      <div class="contenedor">
+        <h2 class="titulo-seccion">Nuestro catálogo</h2>
+        <p class="subtitulo-seccion">Conoce los productos de Vitaflex.</p>
+        <div class="productos">
+          <article class="producto">
+            <img class="producto-foto" src="imagenes/producto1.png" alt="Yeso para dedo" data-ampliar>
+            <div class="producto-contenido">
+              <h3>Yeso para dedo</h3>
+              <p>La férula para dedo protege y mantiene firme la zona lesionada para acelerar la recuperación de fracturas, esguinces o torceduras. Es ligera, transpirable y fácil de ajustar a cualquier dedo con su velcro, garantizando comodidad e higiene diaria sin complicaciones.</p>
+              <span class="precio">₡5.000</span>
+            </div>
+          </article>
+
+          <article class="producto">
+            <img class="producto-foto" src="imagenes/producto2.png" alt="Star Calmer" data-ampliar>
+            <div class="producto-contenido">
+              <h3>Star Calmer</h3>
+              <p>Star Calmer es un juguete antiestrés en forma de estrella impreso en 3D, diseñado para ayudarte a relajarte y concentrarte en cualquier momento. Fabricado con material liviano, resistente y suave al tacto, su textura única ofrece una experiencia táctil reconfortante para liberar tensión de forma rápida y discreta en la oficina, la escuela o en casa. Ideal para combatir la ansiedad diaria con un estilo moderno y práctico.</p>
+              <span class="precio">₡3.000</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección 4: Contacto -->
+    <section class="contacto" id="contacto">
+      <div class="contenedor">
+        <h2 class="titulo-seccion">Contacto</h2>
+        <p class="subtitulo-seccion">Comunícate con Vitaflex.</p>
+        <div class="contacto-grid">
+          <div class="datos-contacto">
+            <h3>Datos de contacto</h3>
+            <p><strong>Correo electrónico:</strong></p>
+            <p class="correo"><a href="mailto:vitaflex.9@hotmail.com">vitaflex.9@hotmail.com</a></p>
+          </div>
+
+          <form class="formulario" id="formularioContacto">
+            <h3>Envíanos un mensaje</h3>
+            <div class="campo">
+              <label for="nombre">Nombre</label>
+              <input type="text" id="nombre" name="nombre" required>
+            </div>
+            <div class="campo">
+              <label for="correo">Correo electrónico</label>
+              <input type="email" id="correo" name="correo" required>
+            </div>
+            <div class="campo">
+              <label for="mensaje">Mensaje</label>
+              <textarea id="mensaje" name="mensaje" required></textarea>
+            </div>
+            <button class="boton" type="submit">Preparar mensaje</button>
+            <p class="nota-formulario">El botón abrirá tu aplicación de correo para enviar el mensaje.</p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Pie de página -->
+  <footer>
+    <p>Vitaflex | Cuidamos tu cuerpo y acompañamos tu mente</p>
+  </footer>
+
+  <!-- Ventana emergente para ampliar las fotos -->
+  <div class="modal" id="modalFoto" role="dialog" aria-modal="true" aria-label="Fotografía ampliada">
+    <div class="modal-contenido">
+      <button class="cerrar-modal" id="cerrarModal" aria-label="Cerrar ventana">×</button>
+      <img id="imagenAmpliada" src="" alt="Fotografía del producto ampliada">
+    </div>
+  </div>
+
+  <script>
+    // Menú desplegable para celulares
+    const botonMenu = document.getElementById("botonMenu");
+    const enlacesNav = document.getElementById("enlacesNav");
+
+    botonMenu.addEventListener("click", () => {
+      const estaAbierto = enlacesNav.classList.toggle("visible");
+      botonMenu.setAttribute("aria-expanded", estaAbierto);
+      botonMenu.textContent = estaAbierto ? "×" : "☰";
+    });
+
+    // Cerrar el menú al seleccionar una sección
+    enlacesNav.querySelectorAll("a").forEach(enlace => {
+      enlace.addEventListener("click", () => {
+        enlacesNav.classList.remove("visible");
+        botonMenu.setAttribute("aria-expanded", "false");
+        botonMenu.textContent = "☰";
+      });
+    });
+
+    // Abrir y cerrar la ventana emergente de las fotografías
+    const modal = document.getElementById("modalFoto");
+    const imagenAmpliada = document.getElementById("imagenAmpliada");
+    const cerrarModal = document.getElementById("cerrarModal");
+
+    document.querySelectorAll("[data-ampliar]").forEach(foto => {
+      foto.addEventListener("click", () => {
+        imagenAmpliada.src = foto.src;
+        imagenAmpliada.alt = foto.alt;
+        modal.classList.add("abierto");
+      });
+    });
+
+    function cerrarVentana() {
+      modal.classList.remove("abierto");
+      imagenAmpliada.src = "";
+    }
+
+    cerrarModal.addEventListener("click", cerrarVentana);
+    modal.addEventListener("click", evento => {
+      if (evento.target === modal) cerrarVentana();
+    });
+    document.addEventListener("keydown", evento => {
+      if (evento.key === "Escape") cerrarVentana();
+    });
+
+    // Preparar el mensaje en la aplicación de correo
+    document.getElementById("formularioContacto").addEventListener("submit", evento => {
+      evento.preventDefault();
+      const nombre = document.getElementById("nombre").value.trim();
+      const correo = document.getElementById("correo").value.trim();
+      const mensaje = document.getElementById("mensaje").value.trim();
+
+      const asunto = encodeURIComponent("Mensaje desde el sitio web de Vitaflex");
+      const cuerpo = encodeURIComponent(
+        "Nombre: " + nombre + "\nCorreo: " + correo + "\n\nMensaje:\n" + mensaje
+      );
+
+      window.location.href = "mailto:vitaflex.9@hotmail.com?subject=" + asunto + "&body=" + cuerpo;
+    });
+  </script>
+</body>
+</html>
